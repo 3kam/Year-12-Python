@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bird Inheritance Example</title>
+  </head>
+  <body>
+    <script>
+      // Base class
+      class Bird {
+        constructor(type, colour) {
+          this.birdtype = type;
+          this.birdcolour = colour;
+        }
+
+        fly() {
+          document.write("The " + this.birdtype + " is flying.<br>");
+        }
+
+        eat() {
+          document.write("The " + this.birdtype + " is eating.<br>");
+        }
+
+        sleep() {
+          document.write("The " + this.birdtype + " is sleeping.<br>");
+        }
+
+        poo() {
+          document.write("The " + this.birdtype + " is pooing.<br>");
+        }
+      }
+
+      // Subclass 1: Parrot
+      class Parrot extends Bird {
+        talk() {
+          document.write("The " + this.birdtype + " is talking.<br>");
+        }
+      }
+
+      // Subclass 2: Rainbow Lorikeet
+      class Rainbow_Lorikeet extends Bird {
+        sing() {
+          document.write(
+            "The " + this.birdtype + " is singing beautifully.<br>"
+          );
+        }
+
+        drinkNectar() {
+          document.write(
+            "The " + this.birdtype + " is drinking nectar from flowers.<br>"
+          );
+        }
+      }
+
+      // Create a few birds and test them
+      var budgerigar = new Bird("Budgerigar", "Blue");
+      budgerigar.fly();
+      budgerigar.eat();
+      budgerigar.sleep();
+      budgerigar.poo();
+
+      document.write("<br>");
+
+      var parrot = new Parrot("Parrot", "Red");
+      parrot.fly();
+      parrot.eat();
+      parrot.talk();
+
+      document.write("<br>");
+
+      var lorikeet = new Rainbow_Lorikeet("Rainbow Lorikeet", "Multi-coloured");
+      lorikeet.fly();
+      lorikeet.eat();
+      lorikeet.sing();
+      lorikeet.drinkNectar();
+    </script>
+  </body>
+</html>

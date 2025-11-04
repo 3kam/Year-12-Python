@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>linkpick.htm</title>
+
+    <script type="text/javascript">
+      function link() {
+        var form = document.form1;
+        var site = form.links.options[form.links.selectedIndex].value;
+
+        if (site == "") return;
+
+        location.href = "http://" + site;
+      }
+    </script>
+  </head>
+
+  <body>
+    <form name="form1">
+      <b>Pick a link:</b><br />
+
+      <select name="links" onchange="link()">
+        <option value="" selected></option>
+        <option value="www.google.com">Google</option>
+        <option value="www.yahoo.com">Yahoo</option>
+      </select>
+    </form>
+  </body>
+</html>

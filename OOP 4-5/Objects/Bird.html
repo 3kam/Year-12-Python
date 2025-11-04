@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bird Class Example</title>
+  </head>
+  <body>
+    <script>
+      class Bird {
+        constructor(type, colour) {
+          this.birdtype = type;
+          this.birdcolour = colour;
+        }
+
+        fly() {
+          document.write("The " + this.birdtype + " is flying.<br>");
+        }
+
+        eat() {
+          document.write("The " + this.birdtype + " is eating.<br>");
+        }
+
+        sleep() {
+          document.write("The " + this.birdtype + " is sleeping.<br>");
+        }
+
+        poo() {
+          document.write("The " + this.birdtype + " is pooing.<br>");
+        }
+      }
+
+      class Parrot extends Bird {
+        talk() {
+          document.write("The " + this.birdtype + " is talking.<br>");
+        }
+      }
+
+      // Create bird objects and call their methods
+      var budgerigar = new Bird("Budgerigar", "Blue");
+      budgerigar.fly();
+      budgerigar.eat();
+      budgerigar.sleep();
+      budgerigar.poo();
+
+      var kookaburra = new Bird("Kookaburra", "Brown and White");
+      kookaburra.fly();
+      kookaburra.eat();
+      kookaburra.sleep();
+      kookaburra.poo();
+
+      var parrot = new Parrot("Parrot", "Red");
+      parrot.fly();
+      parrot.eat();
+      parrot.talk();
+    </script>
+  </body>
+</html>

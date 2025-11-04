@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>JavaScript Form Validation Example</title>
+  </head>
+
+  <body>
+    <h1>JavaScript Form Validation Example</h1>
+
+    <ul>
+      <li>The errors are shown in a MESSAGE LINE, one error at a time.</li>
+      <li>FirstName, LastName, and Email are required fields.</li>
+      <li>FirstName max length is 30, LastName max length is 50.</li>
+      <li>Phone number should be numeric only.</li>
+      <li>A Country should be selected.</li>
+    </ul>
+
+    <form name="myform" onsubmit="return myForm();">
+      <table cellspacing="2" cellpadding="2" border="0">
+        <tr>
+          <td align="right">First Name</td>
+          <td><input type="text" name="FirstName" /></td>
+        </tr>
+
+        <tr>
+          <td align="right">Last Name</td>
+          <td><input type="text" name="LastName" /></td>
+        </tr>
+
+        <tr>
+          <td align="right">Email</td>
+          <td><input type="text" name="Email" /></td>
+        </tr>
+
+        <tr>
+          <td align="right">Phone</td>
+          <td><input type="text" name="Phone" /></td>
+        </tr>
+
+        <tr>
+          <td align="right">Address</td>
+          <td><textarea cols="20" rows="5" name="Address"></textarea></td>
+        </tr>
+
+        <tr>
+          <td align="right">Country</td>
+          <td>
+            <select name="Country">
+              <option value="000" selected>[choose yours]</option>
+              <option value="008">Algeria</option>
+              <option value="012">Austria</option>
+              <option value="016">Angola</option>
+              <option value="020">China</option>
+              <option value="024">Colombia</option>
+              <option value="660">France</option>
+              <option value="662">Libya</option>
+              <option value="663">Mozambique</option>
+              <option value="010">Portugal</option>
+              <option value="032">Spain</option>
+              <option value="051">UK</option>
+              <option value="533">USA</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td align="right"></td>
+          <td><input type="submit" value="SUBMIT" /></td>
+        </tr>
+      </table>
+    </form>
+
+    <p id="demo" style="color: red; font-weight: bold"></p>
+
+    <!-- JavaScript Validation Code -->
+    <script language="JavaScript" type="text/javascript">
+      function myForm() {
+        var FirstName = document.forms["myform"]["FirstName"].value;
+        var LastName = document.forms["myform"]["LastName"].value;
+        var Email = document.forms["myform"]["Email"].value;
+        var Phone = document.forms["myform"]["Phone"].value;
+        var Country = document.forms["myform"]["Country"].value;
+
+        // Validation Rules
+        if (FirstName.length > 30) {
+          document.getElementById("demo").innerHTML = "First Name too long";
+          return false;
+        }
+
+        if (LastName.length > 50) {
+          document.getElementById("demo").innerHTML = "Last Name too long";
+          return false;
+        }
+
+        if (Email.length == 0) {
+          document.getElementById("demo").innerHTML = "Email must be entered";
+          return false;
+        }
+
+        if (Phone.length > 9 || isNaN(Phone)) {
+          document.getElementById("demo").innerHTML = "Phone number is invalid";
+          return false;
+        }
+
+        if (Country == "000") {
+          document.getElementById("demo").innerHTML =
+            "Please select your country";
+          return false;
+        }
+
+        document.getElementById("demo").style.color = "green";
+        document.getElementById("demo").innerHTML =
+          "Form submitted successfully!";
+        return true;
+      }
+    </script>
+  </body>
+</html>

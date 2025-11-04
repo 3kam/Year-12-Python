@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            font-size: 16pt;
+            background-image: url('image.jpg');
+        }
+    </style>
+    <script>
+        function hello() {
+            if (document.getElementById("clicked").value == "no") {
+                document.getElementById("HelloMessage").innerHTML = "<b>Hello, world</b>";
+                document.getElementById("clicked").value = "yes";
+            } else {
+                document.getElementById("clicked").value = "no";
+                document.getElementById("HelloMessage").innerHTML = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Example HTML, CSS, JS on the one page</h1>
+    <input type="hidden" id="clicked" value="no">
+    <p id="HelloMessage">&nbsp;</p>
+    <button onclick="hello()">Hello!</button>
+</body>
+</html>

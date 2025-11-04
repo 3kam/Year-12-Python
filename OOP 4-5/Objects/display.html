@@ -1,0 +1,76 @@
+<html>
+  <script language="JavaScript">
+    /* Filename: display.html
+
+   Replicates objects using displays i.e. a real-life scenario. */
+
+    class display {
+      /* Get the display to recognise the signal sent to it */
+      constructor(signal, device) {
+        if (signal || device) {
+          this.display_signal = signal;
+          this.display_device = device;
+          this.display_brightness = 50;
+        } else {
+          alert("No signal nor device type sent to the display.");
+        }
+      }
+
+      /* Turn on the display. */
+      turn_on(screen) {
+        if (this.display_signal == "ON") {
+          document.write("The " + this.display_device + " is ON. <br>");
+          this.display_status = 1;
+          this.display_signal = "";
+        } else if (this.display_signal == "OFF" || screen == "OFF") {
+          document.write("The " + this.display_device + " is OFF. <br>");
+          this.display_status = 0;
+        }
+      }
+
+      /* Control the brightness of the TV */
+      control_brightness(brightness) {
+        if (this.display_status == 1) {
+          if (brightness == "BRIGHT_UP") {
+            this.display_brightness = this.display_brightness + 1;
+          } else if (brightness == "BRIGHT_DOWN") {
+            this.display_brightness = this.display_brightness - 1;
+          }
+          document.write("Brightness now: " + this.display_brightness + "<br>");
+        } else {
+          alert("You have not turned on the display.");
+        }
+      }
+
+      /* Control the source of the picture for the display */
+      control_source() {
+        if (this.display_status == 1) {
+          switch (this.display_device) {
+            case "HDMI":
+              document.write("HDMI source enabled<br>");
+              break;
+            case "AV":
+              document.write("AV source enabled<br>");
+              break;
+            case "ANT":
+              document.write("Antenna enabled<br>");
+              break;
+            case "VGA":
+              document.write("VGA source enabled<br>");
+            default:
+              document.write("No source selected<br>");
+          }
+        } else {
+          alert("You have not turned on the display.");
+        }
+      }
+    }
+
+    var TV = new display("ON", "HDMI");
+    TV.turn_on();
+    TV.control_brightness("BRIGHT_UP");
+    TV.control_source();
+    TV.control_brightness("BRIGHT_DOWN");
+    TV.turn_on("OFF");
+  </script>
+</html>

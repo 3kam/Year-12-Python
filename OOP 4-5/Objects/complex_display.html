@@ -1,0 +1,127 @@
+<html>
+  <script language="JavaScript">
+    /* Filename: display.html
+   Replicates objects using displays i.e. a real-life scenario. */
+
+    class Display {
+      constructor(signal, device) {
+        if (signal || device) {
+          this.display_signal = signal;
+          this.display_device = device;
+          this.display_brightness = 50;
+        } else {
+          alert("No signal nor device type sent to the display.");
+        }
+      }
+
+      turn_on(screen) {
+        if (this.display_signal == "ON") {
+          document.write("The " + this.display_device + " is ON.<br>");
+          this.display_status = 1;
+          this.display_signal = "";
+        } else if (this.display_signal == "OFF" || screen == "OFF") {
+          document.write("The " + this.display_device + " is OFF.<br>");
+          this.display_status = 0;
+        }
+      }
+
+      control_brightness(brightness) {
+        if (this.display_status == 1) {
+          if (brightness == "BRIGHT_UP") {
+            this.display_brightness += 1;
+          } else if (brightness == "BRIGHT_DOWN") {
+            this.display_brightness -= 1;
+          }
+          document.write("Brightness now: " + this.display_brightness + "<br>");
+        } else {
+          alert("You have not turned on the display.");
+        }
+      }
+
+      control_source() {
+        if (this.display_status == 1) {
+          switch (this.display_device) {
+            case "HDMI":
+              document.write("HDMI source enabled<br>");
+              break;
+            case "AV":
+              document.write("AV source enabled<br>");
+              break;
+            case "ANT":
+              document.write("Antenna enabled<br>");
+              break;
+            case "VGA":
+              document.write("VGA source enabled<br>");
+              break;
+            default:
+              document.write("No source selected<br>");
+          }
+        } else {
+          alert("You have not turned on the display.");
+        }
+      }
+    }
+
+    /* ---- Subclasses ---- */
+
+    class Smartwatch extends Display {
+      display_menu() {
+        document.write(
+          "Smartwatch menu: Heart Rate, Steps, Notifications.<br>"
+        );
+      }
+    }
+
+    class mobile_phone extends Display {
+      call(number) {
+        this.in_call = true;
+        this.phone_number = number;
+        document.write("Calling " + number + "...<br>");
+      }
+
+      hangup() {
+        if (this.in_call) {
+          document.write("Call ended.<br>");
+          this.in_call = false;
+        } else {
+          document.write("No active call to hang up.<br>");
+        }
+      }
+    }
+
+    class TV extends Display {
+      change_channel(channel) {
+        this.channel = channel;
+        document.write("Channel changed to " + channel + ".<br>");
+      }
+
+      volume(action) {
+        if (!this.volume_level) this.volume_level = 10;
+        if (action == "UP") this.volume_level++;
+        else if (action == "DOWN") this.volume_level--;
+        document.write("Volume level: " + this.volume_level + "<br>");
+      }
+    }
+
+    /* ---- Step 17 test code ---- */
+
+    var LGSmartwatch = new Smartwatch("ON", "HDMI");
+    var GoogleSmartwatch = new Smartwatch("ON", "VGA");
+    var OppoA3s = new mobile_phone("ON", "VGA");
+    var SmartTV = new TV("ON", "AV");
+
+    LGSmartwatch.display_menu();
+    GoogleSmartwatch.display_menu();
+
+    LGSmartwatch.control_brightness("BRIGHT_UP");
+    GoogleSmartwatch.control_brightness("BRIGHT_DOWN");
+    SmartTV.control_brightness("BRIGHT_UP");
+    OppoA3s.control_brightness("BRIGHT_DOWN");
+
+    OppoA3s.call("012 234 345");
+    OppoA3s.hangup();
+
+    SmartTV.change_channel("7");
+    SmartTV.volume("UP");
+  </script>
+</html>
