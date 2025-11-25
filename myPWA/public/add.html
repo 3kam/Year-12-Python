@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>FitTrack — Add</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>FitTrack — Add</h1>
+        <nav>
+            <a href="/index.html">Dashboard</a>
+            <a href="/view.html">Catalogue</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Add Exercise</h2>
+            <form id="add-exercise-form">
+                <label>Exercise Name<input id="exercise-name" required /></label>
+                <label>Muscle Group<input id="exercise-group" required /></label>
+                <button type="submit">Add Exercise</button>
+                <p id="add-ex-msg" class="msg"></p>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Add Progress</h2>
+            <form id="add-progress-form">
+                <label>Workout Name<input id="progress-workout" required /></label>
+                <label>Weight (kg)<input id="progress-weight" type="number" step="1" required /></label>
+                <label>Reps<input id="progress-reps" type="number" required /></label>
+                <label>Sets<input id="progress-sets" type="number" required /></label>
+                <button type="submit">Save Progress</button>
+                <p id="add-progress-msg" class="msg"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2025 FitTrack</p>
+    </footer>
+
+    <script src="/js/addItem.js"></script>
+</body>
+
+</html>

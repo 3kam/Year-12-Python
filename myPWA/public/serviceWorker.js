@@ -1,61 +1,32 @@
-const assets = [
-    "/",
-    "css/style.css",
-    "js/app.js",
-    "/images/logo.png",
-    "/images/blog2.jpg",
-    "/images/favicon.jpg",
-    "/icons/icon-128x128.png",
-    "/icons/icon-192x192.png",
-    "/icons/icon-384x384.png",
-    "/icons/icon-512x512.png"
-  ];
+const CACHE_NAME = 'fittrack-v1';
+const ASSETS = [
+  '/',
+  '/index.html',
+  '/add.html',
+  '/view.html',
+  '/css/style.css',
+  '/offline.html',
+  '/manifest.json'
+];
 
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
+  self.skipWaiting();
+}); 
 
-const CATALOGUE_ASSETS = "catalogue-assets";
-
-
-self.addEventListener("install", (installEvt) => {
-  installEvt.waitUntil(
-    caches
-      .open(CATALOGUE_ASSETS)
-      .then((cache) => {
-        console.log(cache)
-        cache.addAll(assets);
-      })
-      .then(self.skipWaiting())
-      .catch((e) => {
-        console.log(e);
-      })
-  );
+self.addEventListener('activate', e => {
+  e.waitUntil(self.clients.claim());
 });
 
-
-self.addEventListener("activate", function (evt) {
-  evt.waitUntil(
-    caches
-      .keys()
-      .then((keyList) => {
-        return Promise.all(
-          keyList.map((key) => {
-            if (key === CATALOGUE_ASSETS) {
-              console.log("Removed old cache from", key);
-              return caches.delete(key);
-            }
-          })
-        );
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    fetch(e.request)
+      .then(res => {
+        const resClone = res.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(e.request, resClone));
+        return res;
       })
-      .then(() => self.clients.claim())
+      .catch(() => caches.match(e.request).then(r => r || caches.match('/offline.html')))
   );
 });
-
-
-self.addEventListener("fetch", function (evt) {
-  evt.respondWith(
-    fetch(evt.request).catch(() => {
-      return caches.open(CATALOGUE_ASSETS).then((cache) => {
-        return cache.match(evt.request);
-      });
-    })
-  );
-})

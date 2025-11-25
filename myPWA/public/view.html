@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>FitTrack — Catalogue</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>FitTrack — Catalogue</h1>
+        <nav>
+            <a href="/index.html">Dashboard</a>
+            <a href="/add.html">Add</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Search Exercises</h2>
+            <input id="view-search-input" placeholder="e.g. push up" />
+            <button id="view-search-btn">Search</button>
+        </section>
+
+        <section class="card">
+            <h2>Results</h2>
+            <ul id="catalogue-list"></ul>
+        </section>
+
+        <section class="card">
+            <h2>Progress Entries</h2>
+            <ul id="progress-list"></ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2025 FitTrack</p>
+    </footer>
+
+    <script src="/js/catalogue.js"></script>
+    <script src="/js/search.js"></script>
+</body>
+
+</html>
