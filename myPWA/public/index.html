@@ -1,77 +1,45 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FitTrack — Dashboard</title>
-  <link rel="manifest" href="/manifest.json" />
-  <link rel="stylesheet" href="/css/style.css" />
+  <title>FitTrack — Home</title>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
-
 <body>
-  <div id="app">
+  <header class="site-header">
+    <img src="./images/logo.png" alt="FitTrack Logo" class="logo" />
+    <h1>FitTrack</h1>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="add.html">Workouts</a>
+      <a href="profile.html">Profile</a>
+      <a href="login.html">Login/Sign up</a>
+    </nav>
+  </header>
 
-    <!-- Header -->
-    <header class="site-header">
-      <h1>FitTrack</h1>
-      <nav>
-        <a id="nav-dashboard" href="/index.html">Dashboard</a>
-        <a id="nav-view" href="/view.html">Catalogue</a>
-        <a id="nav-add" href="/add.html">Add</a>
-      </nav>
-    </header>
+  <div class="dashboard-layout">
+    <aside id="workout-sidebar">
+      <button id="new-workout">New Workout</button>
+      <ul id="workout-list"></ul>
+    </aside>
 
-    <!-- Login container (shown if not logged in) -->
-    <section id="login-section" class="card">
-      <h2>Login</h2>
-      <form id="login-form">
-        <label>Email<input id="email" type="email" required /></label>
-        <label>Password<input id="password" type="password" required /></label>
-        <button type="submit">Login</button>
-        <p id="login-msg" class="msg"></p>
-      </form>
-    </section>
-
-    <!-- Dashboard (hidden until logged in) -->
-    <section id="dashboard-section" class="hidden">
-      <h2>Dashboard</h2>
-
-      <div class="dashboard-grid">
-        <div class="card">
-          <h3>Your Weekly Plan</h3>
-          <div id="weekly-plan">No schedule loaded</div>
+    <main>
+      <section class="card">
+        <input id="workout-title" value="Untitled Workout" />
+        <div class="week-controls">
+          <button id="add-week">Add Week</button>
+          <button id="delete-week">Delete Week</button>
         </div>
-
-        <div class="card">
-          <h3>Progress Summary</h3>
-          <div id="progress-summary">No data</div>
-          <button id="open-graph">View Progress Graph</button>
-        </div>
-
-        <div class="card">
-          <h3>Quick Add</h3>
-          <button id="go-add">Add Workout / Progress</button>
-        </div>
-      </div>
-
-      <div id="search-bar" class="card">
-        <input id="search-input" placeholder="Search exercises (e.g., push up)" />
-        <button id="search-btn">Search</button>
-      </div>
-
-      <div id="search-results" class="card"></div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-      <p>© 2025 Ekambir Singh — FitTrack</p>
-    </footer>
-
+        <div id="weeks-container"></div>
+      </section>
+    </main>
   </div>
 
-  <script src="/serviceWorkerRegister.js"></script>
-  <script src="/js/index.js"></script>
-</body>
+  <footer class="site-footer">
+    <p>© 2025 Ekambir Singh — FitTrack</p>
+  </footer>
 
+  <script src="./js/dash.js" defer></script>
+</body>
 </html>

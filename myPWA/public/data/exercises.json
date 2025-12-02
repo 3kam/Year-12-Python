@@ -1,0 +1,7 @@
+{
+  "Chest": ["Bench Press", "Incline Dumbbell Press", "Cable Fly"],
+  "Back": ["Lat Pulldown", "Seated Row", "Deadlift"],
+  "Legs": ["Squat", "Leg Press", "Hamstring Curl"],
+  "Shoulders": ["OHP", "Lateral Raise"],
+  "Arms": ["Bicep Curl", "Tricep Pushdown"]
+}

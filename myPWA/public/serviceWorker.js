@@ -1,32 +1,59 @@
-const CACHE_NAME = 'fittrack-v1';
-const ASSETS = [
-  '/',
-  '/index.html',
-  '/add.html',
-  '/view.html',
-  '/css/style.css',
-  '/offline.html',
-  '/manifest.json'
+const CACHE_NAME = "fittrack-cache-v1";
+const urlsToCache = [
+  "/", 
+  "/index.html",
+  "/css/style.css",
+  "/js/index.js",
+  "/images/logo.png"
 ];
 
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
-  self.skipWaiting();
-}); 
-
-self.addEventListener('activate', e => {
-  e.waitUntil(self.clients.claim());
+// Install event
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    })
+  );
 });
 
-self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  e.respondWith(
-    fetch(e.request)
-      .then(res => {
-        const resClone = res.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(e.request, resClone));
-        return res;
-      })
-      .catch(() => caches.match(e.request).then(r => r || caches.match('/offline.html')))
+// Fetch event
+self.addEventListener("fetch", event => {
+  const url = new URL(event.request.url);
+
+  // Skip unsupported schemes (like chrome-extension://)
+  if (url.protocol === "chrome-extension:" || url.protocol === "chrome:") {
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return (
+        response ||
+        fetch(event.request).then(networkResponse => {
+          // Only cache http/https requests
+          if (event.request.url.startsWith("http")) {
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, networkResponse.clone());
+            });
+          }
+          return networkResponse;
+        })
+      );
+    })
+  );
+});
+
+// Activate event (cleanup old caches)
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
+    )
   );
 });
